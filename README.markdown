@@ -114,7 +114,7 @@ By default the Visma API returns 50 results. To set the count to 50:
 visma_eaccounting.customers.retrieve(params: {"pagesize": "100"})
 ```
 
-And to retrieve the next 50 members:
+And to retrieve the next 50 customers:
 
 ```ruby
 visma_eaccounting.customers.retrieve(params: {"pagesize": "100", "page": "2"})
@@ -155,7 +155,7 @@ available depending on the nature of the error. For example:
 
 ```ruby
 begin
-  visma_eaccounting.customers(customer_id).members.create(body: body)
+  visma_eaccounting.customers.create(body: body)
 rescue VismaEaccounting::VismaEaccountingError => e
   puts "Houston, we have a problem: #{e.message} - #{e.raw_body}"
 end
