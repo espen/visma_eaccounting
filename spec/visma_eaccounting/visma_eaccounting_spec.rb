@@ -14,6 +14,7 @@ describe VismaEaccounting do
       @visma_eaccounting = VismaEaccounting::Request.new
       expect(@visma_eaccounting.token).to be_nil
     end
+
     it "sets an API key in the constructor" do
       @visma_eaccounting = VismaEaccounting::Request.new(token: @token)
       expect(@visma_eaccounting.token).to eq(@token)
@@ -123,6 +124,25 @@ describe VismaEaccounting do
     it "sets api_environment in the constructor" do
       @visma_eaccounting = VismaEaccounting::Request.new(api_environment: :sandbox)
       expect(@visma_eaccounting.api_environment).to be :sandbox
+    end
+
+  end
+
+  describe "supports different environments" do
+    before do
+      VismaEaccounting::APIRequest.send(:public, *VismaEaccounting::APIRequest.protected_instance_methods)
+    end
+
+    it "has correct api url for default production environment" do
+      @visma_eaccounting = VismaEaccounting::Request.new()
+      @request = VismaEaccounting::APIRequest.new(builder: @visma_eaccounting)
+      expect(@request.send(:base_api_url)).to eq("https://eaccountingapi.vismaonline.com/v2/")
+    end
+
+    it "has corret api url when setting sandbox environment" do
+      @visma_eaccounting = VismaEaccounting::Request.new(api_environment: :sandbox)
+      @request = VismaEaccounting::APIRequest.new(builder: @visma_eaccounting)
+      expect(@request.send(:base_api_url)).to eq("https://eaccountingapi-sandbox.test.vismaonline.com/v2/")
     end
 
   end

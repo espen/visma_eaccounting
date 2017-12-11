@@ -182,7 +182,7 @@ module VismaEaccounting
     end
 
     def base_api_url
-      case self.class.api_environment
+      case @request_builder.api_environment
       when :sandbox
         "https://eaccountingapi-sandbox.test.vismaonline.com/v2/"
       when :production

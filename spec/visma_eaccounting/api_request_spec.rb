@@ -6,7 +6,7 @@ describe VismaEaccounting::APIRequest do
 
   before do
     @visma_eaccounting = VismaEaccounting::Request.new(token: token)
-    @api_root = "https://eaccountingapi-sandbox.test.vismaonline.com/v2"
+    @api_root = "https://eaccountingapi.vismaonline.com/v2/"
   end
 
   it "surfaces client request exceptions as a VismaEaccounting::APIError" do
