@@ -10,9 +10,11 @@ VismaEaccounting returns a `VismaEaccounting::Response` instead of the response 
 
     $ gem install visma_eaccounting
 
-## Requirements
+## Authentication
 
-A Visma eAccounting account and oAuth client id.
+The Visma eAccounting API authenticates using a token which you can retrieve when authorizating using OAuth with your Visma eAccounting account.
+
+To retrieve an access token you can use [omniauth-visma](https://github.com/espen/omniauth-visma). Do note that this token expires in one hour so you need to fetch a new access token using the refresh token when required.
 
 ## Usage
 
