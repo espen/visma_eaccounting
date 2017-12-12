@@ -139,7 +139,7 @@ describe VismaEaccounting do
       expect(@request.send(:base_api_url)).to eq("https://eaccountingapi.vismaonline.com/v2/")
     end
 
-    it "has corret api url when setting sandbox environment" do
+    it "has correct api url when setting sandbox environment" do
       @visma_eaccounting = VismaEaccounting::Request.new(api_environment: :sandbox)
       @request = VismaEaccounting::APIRequest.new(builder: @visma_eaccounting)
       expect(@request.send(:base_api_url)).to eq("https://eaccountingapi-sandbox.test.vismaonline.com/v2/")
