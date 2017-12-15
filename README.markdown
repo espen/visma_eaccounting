@@ -1,4 +1,4 @@
-# visma_eaccounting
+# Visma eAccounting Ruby API Wrapper
 
 VismaEaccounting is an API wrapper for the Visma eAccounting [API](https://developer.vismaonline.com/).
 
