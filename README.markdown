@@ -36,7 +36,7 @@ visma_eaccounting.open_timeout = 30
 You can read about `timeout` and `open_timeout` in the [Net::HTTP](https://ruby-doc.org/stdlib-2.3.3/libdoc/net/http/rdoc/Net/HTTP.html) doc.
 
 Now you can make requests using the resources defined in [the Visma eAccounting's docs](https://developer.vismaonline.com/#APIReference). Resource IDs
-are specified inline and a `CRUD` (`create`, `retrieve`, `update`, `upsert`, or `delete`) verb initiates the request. `upsert` lets you update a record, if it exists, or insert it otherwise where supported by Visma's API.
+are specified inline and a `CRUD` (`create`, `retrieve`, `update`, or `delete`) verb initiates the request.
 
 You can specify `headers`, `params`, and `body` when calling a `CRUD` method. For example:
 
