@@ -46,10 +46,11 @@ visma_eaccounting.customers.retrieve(headers: {"SomeHeader": "SomeHeaderValue"},
 
 Of course, `body` is only supported on `create` and `update` calls. Those map to HTTP `POST` and `PUT` verbs respectively.
 
-You can set `token`, `timeout`, `open_timeout`, `faraday_adapter`, `proxy`, `symbolize_keys`, `logger`, and `debug` globally:
+You can set `token`, `api_environment`, `api_endpoint`, `timeout`, `open_timeout`, `faraday_adapter`, `proxy`, `symbolize_keys`, `logger`, and `debug` globally:
 
 ```ruby
 VismaEaccounting::Request.token = "your_token"
+VismaEaccounting::Request.api_environment = :sandbox
 VismaEaccounting::Request.timeout = 15
 VismaEaccounting::Request.open_timeout = 15
 VismaEaccounting::Request.symbolize_keys = true
