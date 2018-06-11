@@ -76,7 +76,7 @@ Visma's [API documentation](https://developer.vismaonline.com/#APIReference) is 
 
 ## Environments
 
-The default environment is ```:production```. To use the sandbox environment you can set ```:sandbox``` in constructor or globally. This will set the default ```api_endpoint``` URL.
+The default environment is ```:production```. To use the sandbox environment you can set ```:sandbox``` in constructor or globally using the ```api_environment``` option. This will set the default ```api_endpoint``` URL.
 
 ## Debug Logging
 
