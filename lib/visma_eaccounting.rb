@@ -8,6 +8,7 @@ require 'visma_eaccounting/api_error'
 require 'visma_eaccounting/request'
 require 'visma_eaccounting/api_request'
 require 'visma_eaccounting/response'
+require 'visma_eaccounting/version'
 
 module VismaEaccounting
 end
