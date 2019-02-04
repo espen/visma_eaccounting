@@ -10,7 +10,7 @@ module VismaEaccounting
       @path_parts = []
       @token = token || self.class.token
       @token = @token.strip if @token
-      @api_environment = api_environment || self.class.api_environment || DEFAULT_API_ENVIRONMENT
+      @api_environment = api_environment || self.class.api_environment || DEFAULT_API_ENVIRONMENT
       @api_endpoint = api_endpoint || self.class.api_endpoint
       @timeout = timeout || self.class.timeout || DEFAULT_TIMEOUT
       @open_timeout = open_timeout || self.class.open_timeout || DEFAULT_OPEN_TIMEOUT
