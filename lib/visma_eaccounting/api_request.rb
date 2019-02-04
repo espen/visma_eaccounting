@@ -78,6 +78,14 @@ module VismaEaccounting
       @request_builder.token
     end
 
+    def api_environment
+      @request_builder.api_environment
+    end
+
+    def api_endpoint
+      @request_builder.api_endpoint
+    end
+
     def timeout
       @request_builder.timeout
     end
