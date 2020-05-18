@@ -10,13 +10,13 @@ describe VismaEaccounting::APIRequest do
   end
 
   it "surfaces client request exceptions as a VismaEaccounting::APIError" do
-    exception = Faraday::Error::ClientError.new("the server responded with status 503")
+    exception = Faraday::ClientError.new("the server responded with status 503")
     stub_request(:get, "#{@api_root}/customers").to_raise(exception)
     expect { @visma_eaccounting.customers.retrieve }.to raise_error(VismaEaccounting::APIError)
   end
 
   it "surfaces an unparseable client request exception as a VismaEaccounting::APIError" do
-    exception = Faraday::Error::ClientError.new(
+    exception = Faraday::ClientError.new(
       "the server responded with status 503")
     stub_request(:get, "#{@api_root}/customers").to_raise(exception)
     expect { @visma_eaccounting.customers.retrieve }.to raise_error(VismaEaccounting::APIError)
@@ -24,7 +24,7 @@ describe VismaEaccounting::APIRequest do
 
   it "surfaces an unparseable response body as a VismaEaccounting::APIError" do
     response_values = {:status => 503, :headers => {}, :body => '[foo]'}
-    exception = Faraday::Error::ClientError.new("the server responded with status 503", response_values)
+    exception = Faraday::ClientError.new("the server responded with status 503", response_values)
 
     stub_request(:get, "#{@api_root}/customers").to_raise(exception)
     expect { @visma_eaccounting.customers.retrieve }.to raise_error(VismaEaccounting::APIError)
@@ -33,7 +33,7 @@ describe VismaEaccounting::APIRequest do
   context "handle_error" do
     it "includes status and raw body even when json can't be parsed" do
       response_values = {:status => 503, :headers => {}, :body => 'A non JSON response'}
-      exception = Faraday::Error::ClientError.new("the server responded with status 503", response_values)
+      exception = Faraday::ClientError.new("the server responded with status 503", response_values)
       api_request = VismaEaccounting::APIRequest.new(builder: VismaEaccounting::Request)
       begin
         api_request.send :handle_error, exception
@@ -46,7 +46,7 @@ describe VismaEaccounting::APIRequest do
     context "when symbolize_keys is true" do
       it "sets title and detail on the error params" do
         response_values = {:status => 422, :headers => {}, :body => '{"title": "foo", "detail": "bar"}'}
-        exception = Faraday::Error::ClientError.new("the server responded with status 422", response_values)
+        exception = Faraday::ClientError.new("the server responded with status 422", response_values)
         api_request = VismaEaccounting::APIRequest.new(builder: VismaEaccounting::Request.new(symbolize_keys: true))
         begin
           api_request.send :handle_error, exception
