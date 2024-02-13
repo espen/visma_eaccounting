@@ -155,7 +155,7 @@ module VismaEaccounting
         if @request_builder.debug
           faraday.response :logger, @request_builder.logger, bodies: true
         end
-        conn.request :authorization, 'Bearer', self.token
+        faraday.request :authorization, 'Bearer', self.token
       end
     end
 
