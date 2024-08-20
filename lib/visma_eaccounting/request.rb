@@ -1,16 +1,14 @@
 module VismaEaccounting
   class Request
-    attr_accessor :token, :api_environment, :api_endpoint, :timeout, :open_timeout, :proxy, :faraday_adapter, :symbolize_keys, :debug, :logger
+    attr_accessor :token, :api_endpoint, :timeout, :open_timeout, :proxy, :faraday_adapter, :symbolize_keys, :debug, :logger
 
     DEFAULT_TIMEOUT = 60
     DEFAULT_OPEN_TIMEOUT = 60
-    DEFAULT_API_ENVIRONMENT = :production
 
-    def initialize(token: nil, api_environment: nil, api_endpoint: nil, timeout: nil, open_timeout: nil, proxy: nil, faraday_adapter: nil, symbolize_keys: false, debug: false, logger: nil)
+    def initialize(token: nil, api_endpoint: nil, timeout: nil, open_timeout: nil, proxy: nil, faraday_adapter: nil, symbolize_keys: false, debug: false, logger: nil)
       @path_parts = []
       @token = token || self.class.token
       @token = @token.strip if @token
-      @api_environment = api_environment || self.class.api_environment || DEFAULT_API_ENVIRONMENT
       @api_endpoint = api_endpoint || self.class.api_endpoint
       @timeout = timeout || self.class.timeout || DEFAULT_TIMEOUT
       @open_timeout = open_timeout || self.class.open_timeout || DEFAULT_OPEN_TIMEOUT
@@ -76,10 +74,10 @@ module VismaEaccounting
     end
 
     class << self
-      attr_accessor :token, :timeout, :open_timeout, :api_environment, :api_endpoint, :proxy, :faraday_adapter, :symbolize_keys, :debug, :logger
+      attr_accessor :token, :timeout, :open_timeout, :api_endpoint, :proxy, :faraday_adapter, :symbolize_keys, :debug, :logger
 
       def method_missing(sym, *args, &block)
-        new(token: self.token, api_environment: self.api_environment, api_endpoint: self.api_endpoint, timeout: self.timeout, open_timeout: self.open_timeout, faraday_adapter: self.faraday_adapter, symbolize_keys: self.symbolize_keys, debug: self.debug, proxy: self.proxy, logger: self.logger).send(sym, *args, &block)
+        new(token: self.token, api_endpoint: self.api_endpoint, timeout: self.timeout, open_timeout: self.open_timeout, faraday_adapter: self.faraday_adapter, symbolize_keys: self.symbolize_keys, debug: self.debug, proxy: self.proxy, logger: self.logger).send(sym, *args, &block)
       end
 
       def respond_to_missing?(method_name, include_private = false)

@@ -78,10 +78,6 @@ module VismaEaccounting
       @request_builder.token
     end
 
-    def api_environment
-      @request_builder.api_environment
-    end
-
     def api_endpoint
       @request_builder.api_endpoint
     end
@@ -189,12 +185,7 @@ module VismaEaccounting
     end
 
     def base_api_url
-      case @request_builder.api_environment
-      when :sandbox
-        "https://eaccountingapi-sandbox.test.vismaonline.com/v2/"
-      when :production
-        "https://eaccountingapi.vismaonline.com/v2/"
-      end
+      "https://eaccountingapi.vismaonline.com/v2/"
     end
   end
 end

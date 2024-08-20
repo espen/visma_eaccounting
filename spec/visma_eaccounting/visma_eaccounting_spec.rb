@@ -116,35 +116,6 @@ describe VismaEaccounting do
       expect(@visma_eaccounting.logger).to be_a Logger
     end
 
-    it "api_environment production by default" do
-      @visma_eaccounting = VismaEaccounting::Request.new
-      expect(@visma_eaccounting.api_environment).to be :production
-    end
-
-    it "sets api_environment in the constructor" do
-      @visma_eaccounting = VismaEaccounting::Request.new(api_environment: :sandbox)
-      expect(@visma_eaccounting.api_environment).to be :sandbox
-    end
-
-  end
-
-  describe "supports different environments" do
-    before do
-      VismaEaccounting::APIRequest.send(:public, *VismaEaccounting::APIRequest.protected_instance_methods)
-    end
-
-    it "has correct api url for default production environment" do
-      @visma_eaccounting = VismaEaccounting::Request.new()
-      @request = VismaEaccounting::APIRequest.new(builder: @visma_eaccounting)
-      expect(@request.send(:base_api_url)).to eq("https://eaccountingapi.vismaonline.com/v2/")
-    end
-
-    it "has correct api url when setting sandbox environment" do
-      @visma_eaccounting = VismaEaccounting::Request.new(api_environment: :sandbox)
-      @request = VismaEaccounting::APIRequest.new(builder: @visma_eaccounting)
-      expect(@request.send(:base_api_url)).to eq("https://eaccountingapi-sandbox.test.vismaonline.com/v2/")
-    end
-
   end
 
   describe "build api url" do
@@ -166,7 +137,6 @@ describe VismaEaccounting do
     before do
       VismaEaccounting::Request.token = "ifeaean8hfaeo8AUfenao(ea"
       VismaEaccounting::Request.timeout = 15
-      VismaEaccounting::Request.api_environment = :sandbox
       VismaEaccounting::Request.api_endpoint = 'https://eaccountingapi.example.org/v1337/'
       VismaEaccounting::Request.logger = logger
       VismaEaccounting::Request.proxy = "http://1234.com"
@@ -178,7 +148,6 @@ describe VismaEaccounting do
     after do
       VismaEaccounting::Request.token = nil
       VismaEaccounting::Request.timeout = nil
-      VismaEaccounting::Request.api_environment = nil
       VismaEaccounting::Request.api_endpoint = nil
       VismaEaccounting::Request.logger = nil
       VismaEaccounting::Request.proxy = nil
@@ -193,11 +162,6 @@ describe VismaEaccounting do
 
     it "set timeout on new instances" do
       expect(VismaEaccounting::Request.new.timeout).to eq(VismaEaccounting::Request.timeout)
-    end
-
-    it "set api_environment on new instances" do
-      expect(VismaEaccounting::Request.api_environment).not_to be_nil
-      expect(VismaEaccounting::Request.new.api_environment).to eq(VismaEaccounting::Request.api_environment)
     end
 
     it "set api_endpoint on new instances" do
